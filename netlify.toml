@@ -1,0 +1,4 @@
+  codeGenerator = "netlify-builtin:nextjs"
+
+[graph]
+  codeGenerator = "netlify-builtin:nextjs"

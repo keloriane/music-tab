@@ -17,7 +17,7 @@ const ArtistCard:React.FC<ArtistProps> = ({title , photo}) => {
                     <S.ImageWrapper
                     
                     >
-                        <Image src={photo} alt={title}/>
+                        <Image src={photo} alt={title} height={400}/>
                     </S.ImageWrapper>
                     <h2>{title}</h2>
                 </S.ArtistCard>

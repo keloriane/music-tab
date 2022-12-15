@@ -6,6 +6,7 @@ import Mayer from './../assets/img/mayer.png'
 import Wooten from './../assets/img/wooten.png'
 import Link from 'next/link';
 import * as S from './../../styles/home.style';
+import { getSecrets, NetlifySecrets } from '@netlify/functions';
 
 
 export default function Home() {

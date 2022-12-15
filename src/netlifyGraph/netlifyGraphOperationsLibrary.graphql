@@ -1,0 +1,13 @@
+query ArtistQuery($query: String = "Metallica") @netlify(id: """3455dbd6-61d0-44d8-b0ed-feab8d1990d6""", doc: """Search artist query""") {
+  spotify {
+    search(data: {query: $query}) {
+      albums {
+        name
+        href
+      }
+      artists {
+        id
+      }
+    }
+  }
+}
