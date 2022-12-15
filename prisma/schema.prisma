@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  email     String     @unique
+  password  String
+  Playlist  Playlist[]
+}
+
+model Artist {
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  name      String     @unique
+  songs     Song[]
+  album     Album[]
+  playlists Playlist[]
+}
+
+model Song {
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  title     String     @unique
+  artist    Artist     @relation(fields: [artistId], references: [id])
+  album     Album      @relation(fields: [albumId], references: [id])
+  artistId  Int
+  albumId   Int
+  playlists Playlist[]
+}
+
+model Album {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String   @unique
+  songs     Song[]
+  artist    Artist   @relation(fields: [artistId], references: [id])
+  albumId   Int
+  artistId  Int
+  songId    Int
+}
+
+model Playlist {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String   @unique
+  artist    Artist   @relation(fields: [artistId], references: [id])
+  songs     Song[]
+  artistId  Int
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    Int
+}
